@@ -1,0 +1,13 @@
+name: Render Latext Text
+on: push
+
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Getting mod files
+        uses: actions/checkout@v4
+      - name: Print created files 
+        run: echo "${{github.event.head_commit.added}}"
+      - name: Print mod files 
+        run: echo "${{github.event.head_commit.modified}}"
