@@ -8,6 +8,6 @@ jobs:
       - name: Getting mod files
         uses: actions/checkout@v4
       - name: Print created files 
-        run: echo "${{github.event.head_commit.added}}"
+        run: git diff --name-only -r HEAD^1 HEAD
       - name: Print mod files 
         run: echo "${{github.event.head_commit.modified}}"
