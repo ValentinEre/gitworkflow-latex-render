@@ -5,9 +5,9 @@ jobs:
   Test:
     runs-on: ubuntu-latest
     steps:
-      - name: Getting mod files
-        uses: actions/checkout@v4
-      - name: Print created files 
-        run: git diff --name-only -r HEAD^1 HEAD
-      - name: Print mod files 
-        run: echo "${{github.event.head_commit.modified}}"
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Get changes
+        run: git diff --name-only ${{ github.event.before }} ${{ github.event.after }}
