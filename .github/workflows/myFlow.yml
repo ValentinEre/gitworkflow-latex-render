@@ -10,7 +10,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Get changes
-        run: git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep "*.py"
+        run: git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep ".py"
       
       # uses: xu-cheng/latex-action@v3
       #   with:
