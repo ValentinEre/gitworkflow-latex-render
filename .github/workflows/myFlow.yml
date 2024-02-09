@@ -9,9 +9,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Get changes
-        run: git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep ".py"
-      
-      # uses: xu-cheng/latex-action@v3
-      #   with:
-      #     root_file: git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep ".py"
+      - name: Tex file render
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep ".tex"
