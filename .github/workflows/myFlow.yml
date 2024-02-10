@@ -9,7 +9,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Get changed .tex files
+      - name: Get .tex files
         id: diff
         run: |
             echo "::set-output name=TEX_FILES::$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep '.tex')"
@@ -17,8 +17,12 @@ jobs:
         uses: xu-cheng/latex-action@v3
         with:
           root_file: ${{ steps.diff.outputs.TEX_FILES }}
+      - name: Get .pdf files
+        id: pdfFiles
+        run: |
+              echo "::set-output name=PDF_FILES::$(ls | grep '.pdf')"
       - name: Upload PDF file
         uses: actions/upload-artifact@v3
         with:
           name: PDF
-          path: main.pdf
+          path: ${{ steps.pdfFiles.outputs.PDF_FILES }}
