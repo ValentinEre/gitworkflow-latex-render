@@ -15,18 +15,15 @@ jobs:
         run: |
           echo "TEX_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep '.tex')" >> $GITHUB_ENV
       - name: Tex file render
-        run: echo $TEX_FILES
-      - uses: xu-cheng/latex-action@v3
+        uses: xu-cheng/latex-action@v3
         with:
           root_file: ${{ env.TEX_FILES }}
       - name: Get .pdf files
-        id: pdfFiles
         run: |
           echo "PDF_FILES=$(ls | grep '.pdf')" >> $GITHUB_ENV
       - uses: actions/download-artifact@v4
         with:
-            name: ${{ env.PDF_FILES }}
-            path: /home/valentinere/Documents/test       
+            name: ${{ env.PDF_FILES }}     
       # - name: Upload PDF file
       #   uses: actions/upload-artifact@v3
       #   with:
