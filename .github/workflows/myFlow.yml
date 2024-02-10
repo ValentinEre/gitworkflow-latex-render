@@ -1,12 +1,14 @@
 name: Render Latext Text
 on: push
 
-env: 
-  TEX_FILES: value
+
 
 jobs:
   Test:
     runs-on: ubuntu-latest
+    env: 
+      TEX_FILES: value
+      PDF_FILES: value
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -19,17 +21,17 @@ jobs:
       - name: Tex file render
         uses: xu-cheng/latex-action@v3
         with:
-          root_file: "$TEX_FILES"
+          root_file: ${{github.env.TEX_FILES}}
       - name: Get .pdf files
         id: pdfFiles
         run: |
               echo "{PDF_FILES}={ls | grep '.pdf'}" >> PDF_FILES
       - uses: actions/download-artifact@v4
         with:
-            name: PDF
+            name: .pdf
             path: /home/valentinere/Documents/test       
       # - name: Upload PDF file
       #   uses: actions/upload-artifact@v3
       #   with:
       #     name: PDF
-      #     path: ${{ steps.pdfFiles.outputs.PDF_FILES }}
+      #     path: ${{ github.env.PDF_FILES }}
