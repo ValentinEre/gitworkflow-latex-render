@@ -26,6 +26,5 @@ def send_pdf_to_disk(files,my_drive):
         file.SetContentFile(f'{file_pdf}')
         file.Upload()
 
-
 if __name__ == "__main__":
     send_pdf_to_disk(find_pdf_files("."),get_drive())
