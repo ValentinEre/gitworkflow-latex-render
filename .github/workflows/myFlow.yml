@@ -15,9 +15,8 @@ jobs:
         with:
           fetch-depth: 0
       - name: Get .tex files
-        id: diff
         run: |
-            echo "{TEX_FILES}={git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep '.tex'}" >> $TEX_FILES
+            echo "{TEX_FILES}={(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep '.tex')}" >> $TEX_FILES
       - name: Tex file render
         run: echo $TEX_FILES
         # uses: xu-cheng/latex-action@v3
