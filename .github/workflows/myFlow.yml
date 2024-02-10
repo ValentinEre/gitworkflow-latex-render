@@ -20,8 +20,10 @@ jobs:
           root_file: ${{ env.TEX_FILES }}
       - name: Get .pdf files
         run: |
-          echo "PDF_FILES=$(ls | grep '.pdf')" >> $GITHUB_ENV
-      - uses: actions/download-artifact@v4
+          echo "PDF_FILES=$(ls | grep '.pdf')" >> $GITHUB_ENV;
+          ls -a
+      - name: Download files
+        uses: actions/download-artifact@v4
         with:
             name: ${{ env.PDF_FILES }}     
       # - name: Upload PDF file
