@@ -12,7 +12,7 @@ jobs:
       - name: Get .tex files
         id: diff
         run: |
-            echo "::set-output name=TEX_FILES::$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep '.tex')"
+            echo "{TEX_FILES}=(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep '.tex')" >> TEX_FILES
       - name: Tex file render
         uses: xu-cheng/latex-action@v3
         with:
@@ -20,9 +20,13 @@ jobs:
       - name: Get .pdf files
         id: pdfFiles
         run: |
-              echo "::set-output name=PDF_FILES::$(ls | grep '.pdf')"
-      - name: Upload PDF file
-        uses: actions/upload-artifact@v3
+              echo "{PDF_FILES}={ls | grep '.pdf'}" >> PDF_FILES
+      - uses: actions/download-artifact@v4
         with:
-          name: PDF
-          path: ${{ steps.pdfFiles.outputs.PDF_FILES }}
+            name: PDF
+            path: /home/valentinere/Documents/test       
+      # - name: Upload PDF file
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: PDF
+      #     path: ${{ steps.pdfFiles.outputs.PDF_FILES }}
