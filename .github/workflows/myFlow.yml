@@ -16,7 +16,8 @@ jobs:
         uses: xu-cheng/latex-action@v3
         with:
           root_file: ${{ env.TEX_FILES }}
-      - name: Set up Python
+      - name: Set up Python and dep
         uses: actions/setup-python@v5
+      - run: pip install PyDrive2 
       - name: Script 
         run: python sender.py
