@@ -1,6 +1,9 @@
 name: Render Latext Text
 on: push
 
+env: 
+  TEX_FILES: value
+
 jobs:
   Test:
     runs-on: ubuntu-latest
@@ -16,7 +19,7 @@ jobs:
       - name: Tex file render
         uses: xu-cheng/latex-action@v3
         with:
-          root_file: ${{ steps.diff.outputs.TEX_FILES }}
+          root_file: "$TEX_FILES"
       - name: Get .pdf files
         id: pdfFiles
         run: |
