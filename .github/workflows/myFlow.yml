@@ -17,3 +17,8 @@ jobs:
         uses: xu-cheng/latex-action@v3
         with:
           root_file: ${{ steps.diff.outputs.TEX_FILES }}
+      - name: Upload PDF file
+        uses: actions/upload-artifact@v3
+        with:
+          name: PDF
+          path: main.pdf
