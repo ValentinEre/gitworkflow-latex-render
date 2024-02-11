@@ -9,16 +9,26 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
       - name: Get .tex files
         run: |
           echo "TEX_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep '.tex')" >> $GITHUB_ENV
+      
       - name: Tex file render
         uses: xu-cheng/latex-action@v3
         with:
           root_file: ${{ env.TEX_FILES }}
+
       - name: Get .pdf files
         run: |
-          echo "PDF_FILES=$(ls | grep '.pdf')" >> $GITHUB_ENV;
+          echo "PDF_FILES=$( ls -d $PWD/* | grep '.pdf')" >> $GITHUB_ENV;
+
+      - name: Upload files    
+        uses: actions/upload-artifact@v4
+        with:
+          name: pdf-artifact
+          path: ${{ env.PDF_FILES }}
+
       - name: Download files    
         uses: actions/download-artifact@v4
         with:
