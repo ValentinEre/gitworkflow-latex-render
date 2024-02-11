@@ -19,9 +19,9 @@ jobs:
       - name: Get .pdf files
         run: |
           echo "PDF_FILES=$(ls | grep '.pdf')" >> $GITHUB_ENV;
-      - name: asd
-        run: ls -a
       - name: Download files    
         uses: actions/download-artifact@v4
         with:
-            name: ${{ env.PDF_FILES }}
+            name: pdf-artifact
+      - name: Display structure of downloaded files
+        run: ls -R
