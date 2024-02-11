@@ -2,7 +2,7 @@ name: Render Latext Text
 on: push
 
 jobs:
-  Test:
+  Render:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -28,7 +28,10 @@ jobs:
         with:
           name: pdf-artifact
           path: ${{ env.PDF_FILES }}
-
+  Download:
+    runs-on: ubuntu-latest
+    needs: Render
+    steps:
       - name: Download files    
         uses: actions/download-artifact@v4
         with:
